@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
 class TodoItem extends Component {
-  state = {};
+  completedStyle = {
+    fontStyle: 'italic',
+    color: '#cdcdcd',
+    textDecoration: 'line-through'
+  };
+
   render() {
     return (
       <div className="todo-item">
@@ -10,7 +15,9 @@ class TodoItem extends Component {
           checked={this.props.item.completed}
           onChange={() => this.props.onChange(this.props.item.id)}
         />
-        <p>{this.props.item.text}</p>
+        <p style={this.props.item.completed ? this.completedStyle : null}>
+          {this.props.item.text}
+        </p>
       </div>
     );
   }
