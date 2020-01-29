@@ -11,6 +11,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on('connection', socket => {
+  // Joining to chat, chatroom
   socket.on('join', ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
     if (error) {
@@ -32,12 +33,14 @@ io.on('connection', socket => {
     callback();
   });
 
+  // Message sending
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
     io.to(user.room).emit('message', { user: user.name, text: message });
     callback();
   });
 
+  // Leave chat
   socket.on('disconnect', () => {
     console.log('User had left!');
   });
