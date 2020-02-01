@@ -6,7 +6,10 @@ const {
   getAllScreams,
   postOneScream,
   getScream,
-  commentOnScream
+  commentOnScream,
+  likeScream,
+  unlikeScream,
+  deleteScream
 } = require('./handlers/screams');
 
 const {
@@ -24,6 +27,9 @@ app.get('/screams', getAllScreams);
 app.post('/scream', FirebaseAuth, postOneScream);
 app.get('/scream/:screamId', getScream);
 app.post('/scream/:screamId/comment', FirebaseAuth, commentOnScream);
+app.get('/scream/:screamId/like', FirebaseAuth, likeScream);
+app.get('/scream/:screamId/unlike', FirebaseAuth, unlikeScream);
+app.delete('/scream/:screamId', FirebaseAuth, deleteScream);
 // Users routes
 app.post('/signup', signUp);
 app.post('/login', logIn);
